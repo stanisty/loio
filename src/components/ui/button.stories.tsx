@@ -48,22 +48,28 @@ export const DefaultSizes: Story = {
     }
 
     return (
-      <div className="grid w-fit gap-5">
-        <div className="flex items-center gap-5">
-          <div className="w-20 shrink-0" />
-          {states.map((state) => (
-            <p key={state} className="capitalize" style={labelStyle}>
-              {state}
+      <div
+        className="grid w-fit gap-5"
+        style={{ gridTemplateColumns: '80px repeat(5, max-content)' }}
+      >
+        <div />
+        {states.map((state) => (
+          <p key={state} className="capitalize" style={labelStyle}>
+            {state}
+          </p>
+        ))}
+
+        <div className="flex flex-col gap-5">
+          {sizes.map((size) => (
+            <p key={size} style={labelStyle}>
+              {size}
             </p>
           ))}
         </div>
 
-        {sizes.map((size) => (
-          <div key={size} className="flex items-center gap-5">
-            <p className="w-20 shrink-0" style={labelStyle}>
-              {size}
-            </p>
-            {states.map((visualState) => (
+        {states.map((visualState) => (
+          <div key={visualState} className="flex flex-col gap-5">
+            {sizes.map((size) => (
               <Button
                 key={`${size}-${visualState}`}
                 size={size}

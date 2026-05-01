@@ -38,7 +38,7 @@ export const Playground: Story = {}
 
 export const DefaultSizes: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex w-fit flex-col items-start gap-3">
       <Button size="lg">Button</Button>
       <Button size="default">Button</Button>
       <Button size="sm">Button</Button>

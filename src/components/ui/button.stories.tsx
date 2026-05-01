@@ -37,26 +37,47 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {}
 
 export const DefaultSizes: Story = {
-  render: () => (
-    <div className="flex w-fit flex-col items-start gap-3">
-      <Button size="lg">Button</Button>
-      <Button size="default">Button</Button>
-      <Button size="sm">Button</Button>
-      <Button size="xs">Button</Button>
-      <Button size="icon-lg" aria-label="Icon lg">
-        <ArrowUpRight className="h-4 w-4" />
-      </Button>
-      <Button size="icon" aria-label="Icon default">
-        <ArrowUpRight className="h-4 w-4" />
-      </Button>
-      <Button size="icon-sm" aria-label="Icon sm">
-        <ArrowUpRight className="h-4 w-4" />
-      </Button>
-      <Button size="icon-xs" aria-label="Icon xs">
-        <ArrowUpRight className="h-4 w-4" />
-      </Button>
-    </div>
-  ),
+  render: () => {
+    const sizes = ['lg', 'default', 'sm', 'xs', 'icon-lg', 'icon', 'icon-sm', 'icon-xs'] as const
+    const states = ['default', 'hover', 'focus', 'loading', 'disabled'] as const
+    const labelStyle = {
+      fontFamily: 'Geist, sans-serif',
+      fontSize: '14px',
+      fontWeight: 500,
+      color: '#8F8F8F',
+    }
+
+    return (
+      <div className="grid w-fit gap-5">
+        <div className="flex items-center gap-5">
+          <div className="w-20 shrink-0" />
+          {states.map((state) => (
+            <p key={state} className="capitalize" style={labelStyle}>
+              {state}
+            </p>
+          ))}
+        </div>
+
+        {sizes.map((size) => (
+          <div key={size} className="flex items-center gap-5">
+            <p className="w-20 shrink-0" style={labelStyle}>
+              {size}
+            </p>
+            {states.map((visualState) => (
+              <Button
+                key={`${size}-${visualState}`}
+                size={size}
+                visualState={visualState}
+                aria-label={`${size} ${visualState}`}
+              >
+                {size.startsWith('icon') ? <ArrowUpRight className="h-4 w-4" /> : 'Button'}
+              </Button>
+            ))}
+          </div>
+        ))}
+      </div>
+    )
+  },
 }
 
 export const Matrix: Story = {
